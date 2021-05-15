@@ -8,6 +8,16 @@ var TodoItemsView = Backbone.View.extend({
             throw new Error("model was not specified.");
         }
         this.model.on("add", this.onAddTodoItem, this)
+        this.model.on("remove", this.onRemoveTodoItem, this)
+    },
+
+    onRemoveTodoItem: function(todoItem){
+        this.$("li#"+todoItem.id).remove();
+    },
+
+    onAddTodoItem: function(todoItem){
+        var view = new TodoItemView({model: todoItem});
+        this.$el.append(view.render().$el);
     },
 
     events: {
@@ -30,11 +40,6 @@ var TodoItemsView = Backbone.View.extend({
         if(e.keyCode == 13){
             this.onClickAdd();
         }   
-    },
-
-    onAddTodoItem: function(todoItem){
-        var view = new TodoItemView({model: todoItem});
-        this.$el.append(view.render().$el);
     },
 
     render: function(){
