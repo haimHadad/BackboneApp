@@ -1,11 +1,12 @@
 
 $(document).ready(()=>{
-    var todoItems = new TodoItems([
-        new TodoItem({id:1 , description: "TodoItem 1"}),
-        new TodoItem({id:2 , description: "TodoItem 2"})
-    ]);
+    var todoItems = new TodoItems();
+    todoItems.fetch({
+        error: () => {
+            alert("Server fetch has failed");
+        }
+    });
 
     var todoItemsView = new TodoItemsView({model: todoItems});
-
     $("body").append(todoItemsView.render().$el)
 })

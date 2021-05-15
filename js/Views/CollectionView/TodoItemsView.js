@@ -29,8 +29,13 @@ var TodoItemsView = Backbone.View.extend({
         var $textBox = this.$("#newTodoItem");
 
         if($textBox.val()){
-            var todoItem = new TodoItem({description: $textBox.val()});
+            var todoItem = new TodoItem({title: $textBox.val()});
+            this.model.create(todoItem);
+
+            /*'this.model.create' =
+            todoItem.save();
             this.model.add(todoItem);
+            */
     
             $textBox.val("")
         }
